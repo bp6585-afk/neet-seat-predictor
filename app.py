@@ -207,11 +207,11 @@ if predict_btn or "results" in st.session_state:
         ]
         display.index = range(1, len(display) + 1)
 
-        styled = display.style.applymap(
+        styled = display.style.map(
             style_chance, subset=["Chance %"]
         ).format({"Chance %": "{:.1f}", "Closing Rank 2025": "{:,}"})
         # Gender column styling
-        styled = styled.applymap(
+        styled = styled.map(
             lambda v: "color: #E91E63; font-weight:600" if v == "Female"
             else ("color: #1565C0; font-weight:600" if v == "Male" else ""),
             subset=["Gender"],
@@ -308,8 +308,8 @@ if predict_btn or "results" in st.session_state:
             else:
                 styled_r = (
                     r_df.style
-                    .applymap(style_chance, subset=["Chance %"])
-                    .applymap(
+                    .map(style_chance, subset=["Chance %"])
+                    .map(
                         lambda v: "color: #E91E63; font-weight:600" if v == "Female"
                         else ("color: #1565C0; font-weight:600" if v == "Male" else ""),
                         subset=["Gender"],
