@@ -62,8 +62,13 @@ class Predictor:
         self._load()
 
     def _load(self):
-        unified = PROCESSED_DIR / "unified.csv"
-        if unified.exists():
+        dnn_lookup = PROCESSED_DIR / "unified_dnn.csv"
+        unified    = PROCESSED_DIR / "unified.csv"
+        if dnn_lookup.exists():
+            self._df = pd.read_csv(dnn_lookup)
+            self._mode = "lookup"
+            print("Predictor: DNN-lookup mode (unified_dnn.csv)")
+        elif unified.exists():
             self._df = pd.read_csv(unified)
             self._mode = "lookup"
 

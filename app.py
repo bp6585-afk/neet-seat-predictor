@@ -110,10 +110,13 @@ with st.sidebar:
 
     st.divider()
     st.caption("**Data source:** neetugguidance.in, mcc.nic.in")
+    DNN_LOOKUP_PATH = Path(__file__).parent / "data" / "processed" / "unified_dnn.csv"
     if MODEL_PATH.exists():
         st.success("DNN model loaded ✓", icon="🧠")
+    elif DNN_LOOKUP_PATH.exists():
+        st.success("DNN-calibrated lookup ✓", icon="🧠")
     elif DATA_PATH.exists():
-        st.info("Using lookup mode (run training for DNN)", icon="📋")
+        st.info("Using raw lookup mode", icon="📋")
     else:
         st.warning("No data yet. Run the scraper first.", icon="⚠️")
 

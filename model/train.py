@@ -70,7 +70,7 @@ def train(
     criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, patience=2, factor=0.5, verbose=True
+        optimizer, patience=2, factor=0.5
     )
 
     best_val_loss = float("inf")
@@ -106,7 +106,7 @@ def train(
                 logits = model(
                     b["log_rank"], b["year_norm"],
                     b["college_id"], b["state_id"],
-                    b["category_id"], b["quota_id"], b["round_id"],
+                    b["category_id"], b["quota_id"], b["round_id"], b["gender_id"],
                 )
                 val_loss += criterion(logits, b["label"]).item() * len(b["label"])
                 preds = (torch.sigmoid(logits) > 0.5).float()
